@@ -12,7 +12,7 @@ const TradeList = () => {
       setError(null);
 
       try {
-        const res = await fetch(import.meta.env.VITE_API_URL + "/trades");
+        const res = await fetch(import.meta.env.VITE_API_URL + "/api/trades");
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
         const data = await res.json();
@@ -25,7 +25,7 @@ const TradeList = () => {
           setTrades([]); // Default to empty array
         }
       } catch (error) {
-        console.error("Error fetching trades:", error);
+        console.error("Error fetching trades lll:", error);
         setError("Failed to load trades.");
         setTrades([]); // ✅ Prevents crashing
       } finally {

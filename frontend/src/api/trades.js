@@ -12,7 +12,7 @@ export const fetchTrades = async () => {
     const response = await axios.get(API_URL);
     return response.data;
   } catch (error) {
-    console.error("Error fetching trades:", error);
+    console.error("Error fetching trades yyy:", error);
     throw error;
   }
 };
