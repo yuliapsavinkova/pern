@@ -12,7 +12,7 @@ const TradeList = () => {
       setError(null);
 
       try {
-        const res = await fetch(import.meta.env.VITE_API_URL + "/api/trades");
+        const res = await fetchTrades();
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
         const data = await res.json();
