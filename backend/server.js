@@ -13,6 +13,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
+// Getting the script's folder path
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // Enables JSON body parsing.
 app.use(express.json());
 
@@ -43,8 +46,15 @@ app.use(morgan("dev"));
 
 app.use("/api/trades", tradesRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Server is running...");
+// app.get("/", (req, res) => {
+//   res.send("Server is running...");
+// });
+
+// If need to deploy server and client together
+app.use(express.static(path.join(__dirname, "../frontend", "dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
 });
 
 // Start Server
