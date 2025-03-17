@@ -3,36 +3,13 @@ import { fetchTrades, deleteTrade } from "../api/trades";
 
 const TradeList = () => {
   const [trades, setTrades] = useState([]); // ✅ Always initialize as an array
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getTrades = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        const res = await fetchTrades();
-        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-
-        const data = await res.json();
-        console.log("Fetched trades:", data);
-
-        if (Array.isArray(data)) {
-          setTrades(data); // ✅ Ensure it's an array before setting state
-        } else {
-          console.error("Unexpected response:", data);
-          setTrades([]); // Default to empty array
-        }
-      } catch (error) {
-        console.error("Error fetching trades lll:", error);
-        setError("Failed to load trades.");
-        setTrades([]); // ✅ Prevents crashing
-      } finally {
-        setLoading(false);
-      }
+      const data = await fetchTrades();
+      console.log(data);
+      setTrades(data);
     };
-
     getTrades();
   }, []);
 
