@@ -1,6 +1,6 @@
-import TradeList from "../components/TradeList";
-import TradeForm from "../components/TradeForm";
-import { useState } from "react";
+import TradeList from '../components/TradeList';
+import TradeForm from '../components/TradeForm';
+import { useState } from 'react';
 
 const Home = () => {
   const [trades, setTrades] = useState([]);

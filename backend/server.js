@@ -15,11 +15,6 @@ const PORT = process.env.PORT;
 
 // Getting the script's folder path
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-console.log("~~~~~~~~~~~~~~~~~");
-console.log(import.meta.url);
-console.log("~~~~~~~~~~~~~~~~~");
-console.log(__dirname);
-console.log("~~~~~~~~~~~~~~~~~");
 
 // Enables JSON body parsing.
 app.use(express.json());
@@ -52,18 +47,15 @@ app.use(
   })
 );
 
-// Log the ruquests
+// Log the requests
 app.use(morgan("dev"));
 
 app.use("/api/trades", tradesRoutes);
 
-// app.get("/", (req, res) => {
-//   res.send("Server is running...");
-// });
-
-// If need to deploy server and client together
+// Serve static files (e.g., CSS, JS, images)
 app.use(express.static(path.join(__dirname, "../frontend", "dist")));
 
+// Handle client-side routing by sending index.html for all other routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
 });

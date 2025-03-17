@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { fetchTrades, deleteTrade } from "../api/trades";
+import { useEffect, useState } from 'react';
+import { fetchTrades, deleteTrade } from '../api/trades';
 
 const TradeList = () => {
   const [trades, setTrades] = useState([]); // ✅ Always initialize as an array
@@ -7,7 +7,6 @@ const TradeList = () => {
   useEffect(() => {
     const getTrades = async () => {
       const data = await fetchTrades();
-      console.log(data);
       setTrades(data);
     };
     getTrades();
@@ -18,7 +17,7 @@ const TradeList = () => {
       await deleteTrade(id);
       setTrades((prevTrades) => prevTrades.filter((trade) => trade.id !== id)); // ✅ Use functional state update
     } catch (error) {
-      console.error("Error deleting trade:", error);
+      console.error('Error deleting trade:', error);
     }
   };
 
