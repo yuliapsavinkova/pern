@@ -25,12 +25,6 @@ const TradeList = () => {
   return (
     <div>
       <h2>Trade List</h2>
-
-      {loading && <p>Loading trades...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-
-      {!loading && trades.length === 0 && <p>No trades found.</p>}
-
       <ul>
         {trades.map((trade) => (
           <li key={trade.id}>
