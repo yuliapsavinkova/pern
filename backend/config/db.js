@@ -1,14 +1,13 @@
-import pkg from "pg";
+import pkg from 'pg';
 const { Pool } = pkg;
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { EXTERNAL_DB_URL_STRING, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env;
+const { NEON_DB_STRING } = process.env;
 
 const pool = new Pool({
-  connectionString: EXTERNAL_DB_URL_STRING,
-  // connectionString: `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
+  connectionString: NEON_DB_STRING,
   ssl: {
     rejectUnauthorized: false, // Needed for Render
   },
