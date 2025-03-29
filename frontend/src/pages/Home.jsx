@@ -1,4 +1,4 @@
-import TradeList from '../components/TradeList';
+import TradesList from '../components/TradesList';
 import TradeForm from '../components/TradeForm';
 import { useState } from 'react';
 
@@ -12,8 +12,8 @@ const Home = () => {
   return (
     <div>
       <h1>Trading Dashboard</h1>
-      <TradeForm onTradeAdded={handleTradeAdded} />
-      <TradeList />
+      <TradeForm />
+      <TradesList />
     </div>
   );
 };
