@@ -2,5 +2,7 @@
 .DS_Store
 .notes
 
+_keys/
+
 node_modules
 

@@ -11,6 +11,8 @@ const createTableQuery = `
   );
 `;
 
+const clearTradesQuery = `DELETE FROM trades;`;
+
 const seedTradesQuery = `
   INSERT INTO trades (stock_symbol, quantity, price, trade_type)
   VALUES
@@ -27,6 +29,10 @@ const setupDatabase = async () => {
     // Create table
     await pool.query(createTableQuery);
     console.log('✅ Trades table created or already exists.');
+
+    // Clear existing trades
+    await pool.query(clearTradesQuery);
+    console.log('✅ Existing trades cleared.');
 
     // Seed database
     await pool.query(seedTradesQuery);
