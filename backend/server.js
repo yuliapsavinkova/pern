@@ -1,12 +1,13 @@
-import express from "express";
-import helmet from "helmet";
-import morgan from "morgan";
-import cors from "cors";
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
+import express from 'express';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-import tradesRoutes from "./routes/tradesRoutes.js";
+import tradesRoutes from './routes/tradesRoutes.js';
+import positionsRoutes from './routes/positionsRoutes.js';
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ app.use(
     origin: "https://yourfrontend.com",
     methods: "GET,POST,PUT,DELETE",
     allowedHeaders: "Content-Type,Authorization",
-  }*/)
+  }*/),
 );
 
 // app.use((req, res, next) => {
@@ -39,25 +40,26 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"], // Only allow loading content from the same origin
-        scriptSrc: ["'self'", "trusted-scripts.com"], // Allow scripts from the same origin and trusted source
-        connectSrc: ["'self'", "https://pern-3syx.onrender.com"], // Allow connections to your backend API
+        scriptSrc: ["'self'", 'trusted-scripts.com'], // Allow scripts from the same origin and trusted source
+        connectSrc: ["'self'", 'https://pern-3syx.onrender.com'], // Allow connections to your backend API
       },
     },
-    frameguard: { action: "deny" }, // Disallow iframe embedding
-  })
+    frameguard: { action: 'deny' }, // Disallow iframe embedding
+  }),
 );
 
 // Log the requests
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 
-app.use("/api/trades", tradesRoutes);
+app.use('/api/trades', tradesRoutes);
+app.use('/api/positions', positionsRoutes);
 
 // Serve static files (e.g., CSS, JS, images)
-app.use(express.static(path.join(__dirname, "../frontend", "dist")));
+app.use(express.static(path.join(__dirname, '../frontend', 'dist')));
 
 // Handle client-side routing by sending index.html for all other routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'));
 });
 
 // Start Server
