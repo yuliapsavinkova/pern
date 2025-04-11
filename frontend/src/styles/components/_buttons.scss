@@ -1,0 +1,17 @@
+// components/_buttons.scss
+@use '../abstracts/variables' as var;
+@use 'sass:color';
+
+button {
+  background: var.$accent-color;
+  color: #fff;
+  border: none;
+  border-radius: var.$radius;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font: inherit;
+
+  &:hover {
+    background: color.scale(var.$accent-color, $lightness: -10%);
+  }
+}

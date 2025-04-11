@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PositionsChart from '../components/PositionsChart';
 import PositionsList from '../components/PositionsList';
 
@@ -9,28 +9,30 @@ const PositionsCanvas = () => {
   const [positions, setPositions] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const fetchPositions = async () => {
     if (!spreadsheetName || !spreadsheetRange || !ticker) return;
 
-    const fetchPositions = async () => {
-      setLoading(true);
-      try {
-        console.log('Fetching with:', spreadsheetName, spreadsheetRange, ticker);
-        const res = await fetch(
-          `/api/positions?sheet=${spreadsheetName}&range=${spreadsheetRange}&ticker=${ticker}`,
-        );
-        if (!res.ok) throw new Error('Failed to fetch positions');
-        const data = await res.json();
-        setPositions(data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    setLoading(true);
+    try {
+      console.log('Fetching with:', spreadsheetName, spreadsheetRange, ticker);
+      const res = await fetch(
+        `/api/positions?sheet=${spreadsheetName}&range=${spreadsheetRange}&ticker=${ticker}`,
+      );
+      if (!res.ok) throw new Error('Failed to fetch positions');
+      const data = await res.json();
+      setPositions(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchPositions();
-  }, [spreadsheetName, spreadsheetRange, ticker]);
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      fetchPositions();
+    }
+  };
 
   const filteredPositions = positions.filter(
     (trade) => trade.ticker?.toUpperCase() === ticker.toUpperCase(),
@@ -46,6 +48,7 @@ const PositionsCanvas = () => {
           type="text"
           value={spreadsheetName}
           onChange={(e) => setSpreadsheetName(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
       </label>
 
@@ -55,13 +58,21 @@ const PositionsCanvas = () => {
           type="text"
           value={spreadsheetRange}
           onChange={(e) => setSpreadsheetRange(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
       </label>
 
       <label>
         Ticker:
-        <input type="text" value={ticker} onChange={(e) => setTicker(e.target.value)} />
+        <input
+          type="text"
+          value={ticker}
+          onChange={(e) => setTicker(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
       </label>
+
+      <button onClick={fetchPositions}>Fetch Positions</button>
 
       {loading ? (
         <p>Loading positions...</p>

@@ -1,0 +1,10 @@
+// layout/_card.scss
+@use '../abstracts/variables' as var;
+
+.card {
+  background-color: var.$surface-color;
+  border: 1px solid var.$border-color;
+  border-radius: var.$radius;
+  padding: var.$spacing;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
