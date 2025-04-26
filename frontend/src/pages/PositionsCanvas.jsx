@@ -3,9 +3,9 @@ import PositionsChart from '../components/PositionsChart';
 import PositionsList from '../components/PositionsList';
 
 const PositionsCanvas = () => {
-  const [spreadsheetName, setSpreadsheetName] = useState('VTRS');
-  const [spreadsheetRange, setSpreadsheetRange] = useState('A3:G6');
-  const [ticker, setTicker] = useState('VTRS');
+  const [spreadsheetName, setSpreadsheetName] = useState('PLTR');
+  const [spreadsheetRange, setSpreadsheetRange] = useState('A2:I');
+  const [ticker, setTicker] = useState('PLTR');
   const [positions, setPositions] = useState([]);
   const [loading, setLoading] = useState(false);
 

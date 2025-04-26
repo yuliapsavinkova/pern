@@ -1,0 +1,52 @@
+.xGrid line,
+.yGrid line {
+  stroke: #e0e0e0;
+  stroke-opacity: 0.3;
+  shape-rendering: crispEdges;
+}
+
+.xAxis path,
+.yAxis path {
+  fill: none;
+  stroke: #333;
+  shape-rendering: crispEdges;
+}
+
+.xAxis text,
+.yAxis text {
+  font-size: 10px;
+  fill: #333;
+}
+
+svg {
+  background-color: transparent;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.chartContainer {
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+.cursorLine {
+  stroke: #888;
+  stroke-dasharray: 3, 3;
+  pointer-events: none;
+}
+
+.cursorPriceLabel {
+  font-size: 12px;
+  fill: #fff;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.cursorPayoffLabel {
+  font-size: 12px;
+  fill: #fff;
+  pointer-events: none;
+  white-space: nowrap;
+}
